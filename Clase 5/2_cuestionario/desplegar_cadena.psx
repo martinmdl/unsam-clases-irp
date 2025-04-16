@@ -1,0 +1,13 @@
+Proceso desplegar_cadena
+	
+	definir text como texto;
+	definir cont, i como entero;
+	
+	leer text;	
+	cont <- 0;
+	
+	para i <- 0 hasta longitud(text)-1 hacer		
+		escribir subcadena(text, 0, i);		
+	FinPara
+	
+FinProceso

@@ -1,0 +1,56 @@
+Proceso probador
+	//Atención: No modificar el proceso probador, el objetivo es implementar la función Separar() abajo.
+	Definir cade, separador como Cadena;
+	Definir k, Largo Como Entero;
+	Dimension separada[100];
+	Definir separada como Cadena;
+	
+	Leer cade;
+	Leer separador;
+	
+	Largo <- Separar(cade, separador, separada);
+	
+	Para k<- 0 hasta Largo-1 Hacer
+		Escribir k,") ", separada[k];
+	FinPara
+	Escribir "Largo = ", Largo;
+	
+FinProceso
+
+Funcion L <- Separar(cad, sep, arr)
+    Definir i, j, p, f, L, v como Entero;
+    
+    L <- 0; //para contar la longitud usada del arreglo y dar el nro de indice de arr en el que insertar la prox subcadena
+    i <- 0; //indice a escanear en la cadena cad
+    p <- 0; //principio de la siguiente parte en cad
+    Si Longitud(sep) = 0 Entonces //Para tratar correctamente el caso en que sep=""
+        v <- 1;
+    SiNo
+        v <- 0;
+    FinSi
+    f <- v-1; //final de la última porción
+    
+    Mientras i < Longitud(cad) Hacer
+        j <- 0; // indice de caracter a comparar en el separador sep
+		
+        Mientras j<Longitud(sep) y i+j < Longitud(cad) y Subcadena(cad, i+j, i+j)=Subcadena(sep, j, j) Hacer
+            j <- j + 1;
+        FinMientras
+        
+        Si j = Longitud(sep) Entonces // ¡separador encontrado!
+            arr[L] <- Subcadena(cad, p, f); // guardar la subcadena en el arreglo
+            p <- i + j + v; // pasar el próximo principio de subcadena a justo después del separador
+            i <- p; // vamos empezar a escanear ahí mismo buscando el separador siguiente
+            f <- p - 1 + v; // el final va al carácter anterior, o a ese si el sep está vacío
+            L <- L + 1; // incrementamos L
+        SiNo
+            f <- i;
+            i <- i + 1;
+        FinSi
+    FinMientras
+	
+    Si v=0 Entonces
+        arr[L] <- Subcadena(cad, p, i);
+        L <- L + 1;
+    FinSi
+FinFuncion
